@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Jokes Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Best jokes to make your day</h3>
+        <div id="joke" class="joke">Awesome joke is loading ..... </div>
+        <button id="jokeBtn" class="Btn">Next Joke</button>
+    </div>
+    <script>
+        const jokes = document.querySelector('#joke');
+        const jokeBtn = document.querySelector('#jokeBtn');
+
+         /*Promises*/
+        // const generateJokes = () => {
+
+        //     const setHeader = {
+        //         headers: {
+        //             Accept : "application/json"
+        //         }
+        //     }
+    
+        // fetch('https://icanhazdadjoke.com', setHeader)
+        // .then((res) => res.json() )
+        // .then( (data) => {
+        //     jokes.innerHTML = data.joke;
+        // }).catch((error) => {
+        //     console.log(error);
+        // })
+
+        /*Async-Await*/
+     
+       const generateJokes = async() => {
+        try{
+            const setHeader = {
+                headers: {
+                    Accept : "application/json"
+                }
+            }
+    
+        const res = await fetch('https://icanhazdadjoke.com', setHeader);
+        const data = await res.json();
+         jokes.innerHTML = data.joke;
+
+        }catch(err) {
+            console.log(`The error is ${err}`);
+        }
+
+       }
+        
+        jokeBtn.addEventListener('click',generateJokes);
+        generateJokes();
+    
+    </script>    
+</body>
+</html>
